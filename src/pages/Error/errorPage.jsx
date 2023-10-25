@@ -9,7 +9,7 @@ export default function Error() {
       <section className="error-content">
         <h1>Page Not Found</h1>
         <p>
-          The Page you are looking for doesn't exist or an other error are
+          The Page you are looking for doesn't exist <br/>or an other error are
           occurred.
         </p>
         <p>Go back to</p>
