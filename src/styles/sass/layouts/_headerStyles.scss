@@ -9,6 +9,7 @@
   .main-nav a {
     font-weight: bold;
     color: $color-text;
+   
   }
   
   .main-nav a.router-link-exact-active {
@@ -18,8 +19,11 @@
   .main-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
+   
   }
-  
+  .main-nav-item >i{
+    margin-right: 5px;
+  }
   .main-nav-item:hover {
     text-decoration: underline;
   }
@@ -33,3 +37,4 @@
     max-width: 100%;
     width: 200px;
   }
+

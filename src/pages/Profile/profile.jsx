@@ -3,7 +3,7 @@ import "../../styles/sass/pages/_profileStyles.scss";
 
 export default function Profile() {
   return (
-    <main className="main bg-dark">
+    <main className="main bg-dark flex-column">
       <div className="header">
         <h1>
           Welcome back

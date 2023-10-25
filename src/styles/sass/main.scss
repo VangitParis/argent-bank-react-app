@@ -1,11 +1,11 @@
 @import './base/normes';
 @import './utils/variables';
 @import './utils/mixins';
-@import './layouts/headerStyles';
-@import './layouts//footerStyles';
-@import './components/featuresStyles';
-@import './pages/loginStyles';
-@import './pages/profileStyles';
+// @import './layouts/headerStyles';
+// @import './layouts//footerStyles';
+// @import './components/featuresStyles';
+// @import './pages/loginStyles';
+// @import './pages/profileStyles';
 
 
 a{
@@ -32,3 +32,14 @@ a{
   .bg-dark {
     background-color: $background-dark-color;
   }
+
+  .flex-container {
+    display: flex;
+    flex: 1;
+   }
+  .flex-column{
+    display: flex;
+    flex-direction: column;
+    flex:1;
+  }
+  
