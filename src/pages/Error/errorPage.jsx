@@ -1,20 +1,17 @@
-/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { Link } from "react-router-dom";
 import '../../styles/sass/pages/_errorStyles.scss';
 
 export default function Error() {
   return (
-    <main className="main">
+    <main className="main-error">
       <section className="error-content">
-        <h1>Page Not Found</h1>
-        <p>
-          The Page you are looking for doesn&apos;t exist <br/>or an other error are
-          occurred.
-        </p>
-        <p>Go back to</p>
+        <i className="fa fa-exclamation-circle error-icon"></i>
+        <h1>Oops! The page you&apos;re looking for seems to be missing.</h1>
+        <p>An error occurred, or the page may no longer exist.</p>
+        <p>Let&apos;s go back to the</p>
         <Link to="/">
-          <button className="sign-in-button">Home Page</button>
+          <button className="home-button">Home Page</button>
         </Link>
       </section>
     </main>
