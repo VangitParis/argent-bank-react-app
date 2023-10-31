@@ -7,7 +7,7 @@ export default function Error() {
     <main className="main-error">
       <section className="error-content">
         <i className="fa fa-exclamation-circle error-icon"></i>
-        <h1>Oops! The page you&apos;re looking for seems to be missing.</h1>
+        <h1 className="title-error">Oops! The page you&apos;re looking for seems to be missing.</h1>
         <p>An error occurred, or the page may no longer exist.</p>
         <p>Let&apos;s go back to the</p>
         <Link to="/">
