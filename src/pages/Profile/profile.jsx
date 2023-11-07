@@ -4,30 +4,22 @@ import "../../styles/sass/pages/_profileStyles.scss";
 import { connectUser } from "../../services/userService";
 import { userToken } from "../../features/authSlice";
 
-
 export default function Profile() {
   const dispatch = useDispatch();
-  const {loading, userInfo, error } = useSelector((state) => state.auth);
- 
+  const { loading, userInfo, error } = useSelector((state) => state.auth);
+
   useEffect(() => {
-    dispatch(connectUser({ authToken : userToken }));
-  }, [dispatch, userToken, ]);
+    dispatch(connectUser({ authToken: userToken }));
+  }, [dispatch]);
 
-
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
- 
- 
   const getFirstName = userInfo ? userInfo.firstName : "";
   const getLastName = userInfo ? userInfo.lastName : "";
- 
-  
-  return (
+
+  return loading ? (
+    <main className="main">Loading...</main>
+  ) : error ? (
+    <main className="main">Error: {error}</main>
+  ) : (
     <main className="main bg-dark flex-column">
       <div className="header">
         <h1>

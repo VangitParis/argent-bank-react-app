@@ -3,29 +3,46 @@ import { useEffect } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "../../styles/sass/pages/_loginStyles.scss";
 import SignInButton from "../../components/Buttons/signInButton";
-import {  userLogin } from "../../services/userService";
+import { userLogin } from "../../services/userService";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
-// import { selectUser } from "../../utils/selectors";
+import { userToken } from "../../features/authSlice";
 
 export default function Login() {
-  const { loading, userInfo, error } = useSelector((state) => state.user);
+  const { loading, userInfo, error } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- // redirect authenticated user to profile screen
- useEffect(() => {
-  if (userInfo) {
-    navigate('/profile')
-  }
-}, [navigate, userInfo])
-  const handleFormSubmit = () => {
-    dispatch(userLogin({ email, password }));
-    navigate("/profile");
-   
+
+  const handleChange = (e) => {
+    if (e.target.name === "username") {
+      setEmail(e.target.value);
+    } else if (e.target.name === "current-password") {
+      setPassword(e.target.value);
+    }
+  };
+  // redirect authenticated user to profile screen
+  useEffect(() => {
+    if (userToken) {
+      console.log(userInfo);
+    }
+  }, [userToken]);
+
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    // Champs email et mot de passe sont remplis ?
+    if (email && password) {
+      // Données de connexion au backend
+      dispatch(userLogin({ email, password, authToken: userToken }));
+      navigate("/profile");
+    } else {
+      // Cas où les champs ne sont pas remplis
+      // Message d'erreur
+      console.log("Veuillez remplir tous les champs");
+    }
   };
 
   return (
@@ -43,7 +60,7 @@ export default function Login() {
               autoComplete="username"
               required
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="input-wrapper">
@@ -55,7 +72,7 @@ export default function Login() {
               autoComplete="current-password"
               required
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
             />
           </div>
           <div className="input-remember">
