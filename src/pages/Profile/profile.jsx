@@ -1,14 +1,39 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import "../../styles/sass/pages/_profileStyles.scss";
+import { connectUser } from "../../services/userService";
+import { userToken } from "../../features/authSlice";
+
 
 export default function Profile() {
+  const dispatch = useDispatch();
+  const {loading, userInfo, error } = useSelector((state) => state.auth);
+ 
+  useEffect(() => {
+    dispatch(connectUser({ authToken : userToken }));
+  }, [dispatch, userToken, ]);
+
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+ 
+ 
+  const getFirstName = userInfo ? userInfo.firstName : "";
+  const getLastName = userInfo ? userInfo.lastName : "";
+ 
+  
   return (
     <main className="main bg-dark flex-column">
       <div className="header">
         <h1>
           Welcome back
           <br />
-          Tony Jarvis!
+          {getFirstName} {getLastName}
         </h1>
         <button className="edit-button">Edit Name</button>
       </div>
