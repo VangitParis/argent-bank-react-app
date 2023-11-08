@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../../styles/sass/pages/_profileStyles.scss";
 import { connectUser } from "../../services/userService";
 import { userToken } from "../../features/authSlice";
+import UpdateUser from "../../components/UpdateUser/updateUser";
 
 export default function Profile() {
   const dispatch = useDispatch();
@@ -10,10 +11,8 @@ export default function Profile() {
 
   useEffect(() => {
     dispatch(connectUser({ authToken: userToken }));
+    console.log(userInfo);
   }, [dispatch]);
-
-  const getFirstName = userInfo ? userInfo.firstName : "";
-  const getLastName = userInfo ? userInfo.lastName : "";
 
   return loading ? (
     <main className="main">Loading...</main>
@@ -21,14 +20,9 @@ export default function Profile() {
     <main className="main">Error: {error}</main>
   ) : (
     <main className="main bg-dark flex-column">
-      <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {getFirstName} {getLastName}
-        </h1>
-        <button className="edit-button">Edit Name</button>
-      </div>
+          <div className="header">
+            <UpdateUser />
+          </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">
         <div className="account-content-wrapper">

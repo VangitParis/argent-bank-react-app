@@ -45,6 +45,33 @@
     font-weight: bold;
     padding: 10px;
   }
+  .edit-form {
+    // margin-top: 0.67em;
+    // margin-bottom: 0.67em;
+    >input{
+      color: $color-black;
+      border-color: $color-white;
+      background-color: $color-white;
+      font-weight: bold;
+      padding: 10px;
+      margin: 0 10px;
+    }
+
+  }
+  .update-button-container{
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .edit-button-update{
+    border-color: $color-green;
+    background-color: $color-white;
+    color: $color-green;
+    font-weight: bold;
+    padding: 5px;
+    margin: 0 10px;
+    width: auto;
+  }
   
   .header {
     color: $color-white;

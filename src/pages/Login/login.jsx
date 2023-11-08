@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import "font-awesome/css/font-awesome.min.css";
 import "../../styles/sass/pages/_loginStyles.scss";
 import SignInButton from "../../components/Buttons/signInButton";
@@ -24,12 +24,12 @@ export default function Login() {
       setPassword(e.target.value);
     }
   };
-  // redirect authenticated user to profile screen
-  useEffect(() => {
-    if (userToken) {
-      console.log(userInfo);
-    }
-  }, [userToken]);
+  // // redirect authenticated user to profile screen
+  // useEffect(() => {
+  //   if (userToken) {
+  //     console.log(userInfo);
+  //   }
+  // }, [userToken]);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -37,6 +37,7 @@ export default function Login() {
     if (email && password) {
       // Données de connexion au backend
       dispatch(userLogin({ email, password, authToken: userToken }));
+     console.log(userInfo);
       navigate("/profile");
     } else {
       // Cas où les champs ne sont pas remplis

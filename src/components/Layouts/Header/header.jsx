@@ -7,10 +7,12 @@ import { useNavigate } from "react-router-dom/dist";
 import { useSelector } from "react-redux";
 
 export default function Header() {
-  const {userInfo} = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.auth);
+  const { userUpdateInfo} = useSelector((state)=> state.update)
+  
   const navigate = useNavigate();
   const isConnected = localStorage.getItem("userToken");
-
+ 
   // Fonction de déconnexion
   const handleLogout = () => {
     // Supprimer la clé du token de l'utilisateur du localStorage
@@ -19,7 +21,17 @@ export default function Header() {
   };
 
   const getFirstName = userInfo ? userInfo.firstName : "";
+  const getUpdateFirstName = userUpdateInfo ? userUpdateInfo.firstName : "";
+  
+  let firstName = "";
 
+  if (userUpdateInfo) {
+    firstName = getUpdateFirstName;
+   
+  } else {
+   firstName = getFirstName;
+ 
+  }
 
   return (
     <header>
@@ -39,7 +51,7 @@ export default function Header() {
             <>
               <Link className="main-nav-item" to="/profile">
                 <i className="fa fa-user-circle"></i>
-                {getFirstName}
+                {firstName}
               </Link>
               <Link className="main-nav-item" to="/login" onClick={handleLogout}>
                 <i className="fa fa-sign-out"></i>

@@ -1,12 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { callApi } from "./apiCall";
 import { userToken } from "../features/authSlice";
+import { userTokenUpdated } from "../features/updateSlice";
 
 const backendURL = "http://localhost:3001";
 
-
 export const userLogin = createAsyncThunk(
-  "auth/login",
+  "user/login",
   async ({ email, password }, { rejectWithValue }) => {
     const url = `${backendURL}/api/v1/user/login`;
     const data = { email, password };
@@ -33,26 +33,6 @@ export const userLogin = createAsyncThunk(
   }
 );
 
-// export async function createUser(
-//   email,
-//   password,
-//   firstName,
-//   lastName,
-
-//   store
-// ) {
-//   const url = `${backendURL}/api/v1/user/signup`;
-//   const data = { email, password, firstName, lastName };
-
-//   try {
-//     const response = await callApi(url, "POST", data);
-//     const userToken = await response.json();
-//     store.dispatch(userActions.resolved(userToken)); // Dispatch l'action avec le token
-//   } catch (error) {
-//     store.dispatch(userActions.rejected("Registration failed"));
-//   }
-// }
-
 export const connectUser = createAsyncThunk(
   "auth/connexion",
   async ({ firstName, lastName }, { rejectWithValue }) => {
@@ -72,29 +52,22 @@ export const connectUser = createAsyncThunk(
   }
 );
 
-// export const updateUserProfile = createAsyncThunk(
-//   "user/updateUserProfile",
-//   // Thunk function
-//   async (data, { dispatch, getState }) => {
-//     const authToken = selectUser(getState());
-//     const url = `${backendURL}/api/v1/user/profile`;
+export const updateUserProfile = createAsyncThunk(
+  "update/updateUserProfile",
+  async ({ firstName, lastName }, { rejectWithValue }) => {
+    const url = `${backendURL}/api/v1/user/profile`;
+    const data = { firstName, lastName };
+    try {
+      const response = await callApi(url, "PUT", data, userTokenUpdated);
+     
+      if (response.status === 200) {
+        return response; 
+      } else {
+        return rejectWithValue("An error occurred");
+      }
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
-//     try {
-//       const response = await callApi(url, "PUT", data, authToken);
-
-//       if (response.status === 401) {
-//         dispatch(userActions.rejected("Invalid token"));
-//         return;
-//       }
-
-//       if (response.status === 200) {
-//         const updatedData = await response.json();
-//         dispatch(userActions.resolved(updatedData));
-//       } else {
-//         dispatch(userActions.rejected("An error occurred"));
-//       }
-//     } catch (error) {
-//       dispatch(userActions.rejected("An error occurred"));
-//     }
-//   }
-// );
