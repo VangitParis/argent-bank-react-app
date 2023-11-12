@@ -18,7 +18,10 @@ const updateSlice = createSlice({
   name: "update",
   initialState,
   reducers: {
-    
+    resetUpdateUser: () => {
+      // Réinitialisez l'état de l'utilisateur en utilisant initialState pour la tranche update
+      return { ...initialState };
+    },
   },
   extraReducers: (builder) => {
     // connect user
@@ -40,6 +43,6 @@ const updateSlice = createSlice({
   },
 });
 
-export const { resetUser } = updateSlice.actions;
+export const { resetUpdateUser } = updateSlice.actions;
 
 export default updateSlice.reducer;

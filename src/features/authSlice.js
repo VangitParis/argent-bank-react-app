@@ -20,7 +20,7 @@ const authSlice = createSlice({
       state.userToken = action.payload;
     },
 
-    resetUser: () => {
+    resetAuthUser: () => {
       // Réinitialisez l'état de l'utilisateur en utilisant initialState
       return { ...initialState };
     },
@@ -44,6 +44,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUserToken, resetUser } = authSlice.actions;
+export const { setUserToken, resetAuthUser } = authSlice.actions;
 
 export default authSlice.reducer;

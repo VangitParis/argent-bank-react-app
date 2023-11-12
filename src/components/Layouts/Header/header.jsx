@@ -6,7 +6,10 @@ import "../../../styles/sass/layouts/_headerStyles.scss";
 import { useNavigate } from "react-router-dom/dist";
 import { useDispatch, useSelector } from "react-redux";
 // import { userToken } from "../../../features/userSlice";
-import { resetUser } from "../../../features/authSlice";
+import { resetAuthUser } from "../../../features/authSlice";
+import { resetUpdateUser } from "../../../features/updateSlice";
+import { resetUser } from "../../../features/userSlice";
+
 export default function Header() {
   const { userInfo } = useSelector((state) => state.auth);
   const { userUpdateInfo } = useSelector((state) => state.update);
@@ -16,10 +19,11 @@ export default function Header() {
 
   // Fonction de déconnexion
   const handleLogout = () => {
-
     // Supprimer la clé du token de l'utilisateur du localStorage
     localStorage.removeItem("userToken");
     // Dispatch l'action de déconnexion pour réinitialiser l'état de l'utilisateur
+    dispatch(resetAuthUser());
+    dispatch(resetUpdateUser());
     dispatch(resetUser());
 
     // Rediriger vers la page de connexion
@@ -38,7 +42,6 @@ export default function Header() {
   }
 
   return (
-    
     <header>
       <nav className="main-nav">
         {/* Logo */}

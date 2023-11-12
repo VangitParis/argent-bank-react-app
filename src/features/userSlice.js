@@ -18,7 +18,12 @@ const userSlice = createSlice({
   name: "user",
   initialState,
 
-  reducers: {},
+  reducers: {
+    resetUser: () => {
+      // Réinitialisez l'état de l'utilisateur en utilisant initialState pour la tranche update
+      return { ...initialState };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(userLogin.pending, (state) => {
       state.loading = true;
@@ -36,5 +41,7 @@ const userSlice = createSlice({
     });
   },
 });
+
+export const { resetUser } = userSlice.actions;
 
 export default userSlice.reducer;
