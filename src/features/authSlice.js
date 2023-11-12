@@ -1,10 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { connectUser } from "../services/userService";
 
-// initialize userToken from local storage
-export const userToken = localStorage.getItem("userToken")
-  ? localStorage.getItem("userToken")
-  : null;
+// get userToken from local storage
+export const userToken = localStorage.getItem("userToken") || null;
 
 const initialState = {
   loading: false,
@@ -17,7 +15,17 @@ const initialState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    setUserToken: (state, action) => {
+      state.userToken = action.payload;
+    },
+
+    resetUser: () => {
+      // Réinitialisez l'état de l'utilisateur en utilisant initialState
+      return { ...initialState };
+    },
+  },
+
   extraReducers: (builder) => {
     // connect user
     builder.addCase(connectUser.pending, (state) => {
@@ -27,9 +35,7 @@ const authSlice = createSlice({
     builder.addCase(connectUser.fulfilled, (state, action) => {
       state.loading = false;
       state.success = true;
-      state.userToken = action.payload.userToken;
-      state.userInfo = action.payload.body;
-
+      state.userInfo = action.payload;
     });
     builder.addCase(connectUser.rejected, (state, action) => {
       state.loading = false;
@@ -37,5 +43,7 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { setUserToken, resetUser } = authSlice.actions;
 
 export default authSlice.reducer;

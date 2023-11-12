@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateUserProfile } from "../../services/userService";
-import { userToken } from "../../features/authSlice";
+// import { setUserToken } from "../../features/authSlice";
 
 export default function UpdateUser() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -23,15 +23,13 @@ export default function UpdateUser() {
       updateUserProfile({
         firstName,
         lastName,
-        authToken: userToken,
+        authToken: userInfo.userToken,
       })
     );
     setIsEditing(false);
   };
 
-  useEffect(() => {
-    // Ici, vous pouvez vous connecter à Redux si nécessaire
-  }, [dispatch]);
+ 
 
   const handleCancelClick = () => {
     // Annuler les modifications et réinitialisez les champs

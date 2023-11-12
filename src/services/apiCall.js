@@ -25,8 +25,9 @@ export async function callApi(url, method, data, authToken = null) {
   try {
     const response = await fetch(url, requestOptions);
     const data = await response.json();
+    console.log(data);
     return data;
   } catch (error) {
-    throw new Error(error);
+    throw new Error(error.message);
   }
 }

@@ -1,15 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateUserProfile } from "../services/userService";
 
-// initialize userToken from local storage
-export const userTokenUpdated= localStorage.getItem("userToken")
-  ? localStorage.getItem("userToken")
-  : null;
+// // initialize userToken from local storage
+// export const userTokenUpdated= localStorage.getItem("userToken")
+//   ? localStorage.getItem("userToken")
+//   : null;
 
 const initialState = {
   loading: false,
   userUpdateInfo: null,
-  userTokenUpdated,
+  userToken: null,
   error: null,
   success: false,
 };
@@ -17,7 +17,9 @@ const initialState = {
 const updateSlice = createSlice({
   name: "update",
   initialState,
-  reducers: {},
+  reducers: {
+    
+  },
   extraReducers: (builder) => {
     // connect user
     builder.addCase(updateUserProfile.pending, (state) => {
@@ -37,5 +39,7 @@ const updateSlice = createSlice({
     });
   },
 });
+
+export const { resetUser } = updateSlice.actions;
 
 export default updateSlice.reducer;
