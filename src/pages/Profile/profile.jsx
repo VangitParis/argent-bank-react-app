@@ -2,18 +2,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/sass/pages/_profileStyles.scss";
 import { connectUser } from "../../services/userService";
-import { userToken } from "../../features/authSlice";
+
+import UpdateUser from "../../components/UpdateUser/updateUser";
 
 export default function Profile() {
   const dispatch = useDispatch();
-  const { loading, userInfo, error } = useSelector((state) => state.auth);
+
+  const { loading, error } = useSelector((state) => state.auth);
+  const userToken = useSelector((state) => state.auth.userToken);
 
   useEffect(() => {
+    // userToken est présent, connecter l'utilisateur
     dispatch(connectUser({ authToken: userToken }));
-  }, [dispatch]);
-
-  const getFirstName = userInfo ? userInfo.firstName : "";
-  const getLastName = userInfo ? userInfo.lastName : "";
+  }, [dispatch, userToken]);
 
   return loading ? (
     <main className="main">Loading...</main>
@@ -22,12 +23,7 @@ export default function Profile() {
   ) : (
     <main className="main bg-dark flex-column">
       <div className="header">
-        <h1>
-          Welcome back
-          <br />
-          {getFirstName} {getLastName}
-        </h1>
-        <button className="edit-button">Edit Name</button>
+        <UpdateUser />
       </div>
       <h2 className="sr-only">Accounts</h2>
       <section className="account">

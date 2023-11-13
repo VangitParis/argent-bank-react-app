@@ -45,6 +45,36 @@
     font-weight: bold;
     padding: 10px;
   }
+  .edit-form {
+    // margin-top: 0.67em;
+    // margin-bottom: 0.67em;
+    >input{
+      color: rgba(0, 0, 0, 0.5);
+      border: 1px solid grey;
+      border-radius: 5px;
+      background-color: $color-white;
+      font-weight: bold;
+      padding: 10px;
+      margin: 0 10px;
+      font-size: 1rem;
+    }
+
+  }
+  .update-button-container{
+    display: flex;
+    justify-content: space-between;
+    
+  }
+  .edit-button-update{
+    border: 1px solid $color-green;
+    background-color: $color-white;
+    color: $color-green;
+    font-weight: bold;
+    padding: 5px;
+    margin: 0 10px;
+    width: 100px;
+    border-radius: 5px;
+  }
   
   .header {
     color: $color-white;

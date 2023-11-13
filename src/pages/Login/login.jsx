@@ -1,47 +1,81 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
+
 import "font-awesome/css/font-awesome.min.css";
 import "../../styles/sass/pages/_loginStyles.scss";
-import SignInButton from "../../components/Buttons/signInButton";
 import { userLogin } from "../../services/userService";
+import { setUserToken } from "../../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
-import { userToken } from "../../features/authSlice";
+import SignInButton from "../../components/Buttons/signInButton";
+import { updateEmailToRemember } from "../../features/userSlice";
 
 export default function Login() {
-  const { loading, userInfo, error } = useSelector((state) => state.auth);
+  const { loading } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleChange = (e) => {
-    if (e.target.name === "username") {
-      setEmail(e.target.value);
-    } else if (e.target.name === "current-password") {
-      setPassword(e.target.value);
+    const { name, value, type, checked } = e.target;
+
+    if (type === "checkbox") {
+      setRememberMe(checked);
+    } else {
+      if (name === "username") {
+        setEmail(value);
+      } else if (name === "current-password") {
+        setPassword(value);
+      }
     }
   };
-  // redirect authenticated user to profile screen
-  useEffect(() => {
-    if (userToken) {
-      console.log(userInfo);
-    }
-  }, [userToken]);
 
-  const handleFormSubmit = (e) => {
+  const validateEmail = (email) => {
+    // Utilisation de regex pour valider l'email
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Champs email et mot de passe sont remplis ?
-    if (email && password) {
-      // Données de connexion au backend
-      dispatch(userLogin({ email, password, authToken: userToken }));
-      navigate("/profile");
+
+    if (validateEmail(email)) {
+      try {
+        dispatch(userLogin({ email, password })).then((action) => {
+          const response = action.payload;
+
+          // Vérifiez si la connexion a réussi en fonction de la réponse du backend
+          if (response && response.userToken) {
+            const userToken = response.userToken;
+
+            // Mettre à jour le token dans le Redux store
+            dispatch(setUserToken(userToken));
+
+            if (rememberMe) {
+              dispatch(updateEmailToRemember(email));
+            }
+
+            // redirection vers la page de profile
+            navigate("/profile");
+          } else {
+            // Réinitialiser le mot de passe en cas d'échec de connexion
+            setPassword("");
+            setError("Login failed. Please check your login details.");
+          }
+        });
+      } catch (error) {
+        // Réinitialiser le mot de passe en cas d'erreur
+        setPassword("");
+        setError("Connection error :", error);
+      }
     } else {
-      // Cas où les champs ne sont pas remplis
-      // Message d'erreur
-      console.log("Veuillez remplir tous les champs");
+      setError(
+        "Email address is not valid. Please enter a valid email address."
+      );
     }
   };
 
@@ -76,11 +110,17 @@ export default function Login() {
             />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              name="remember-me"
+              checked={rememberMe}
+              onChange={handleChange}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           {error && <p className="error-message">{error}</p>}
-          <SignInButton onClick={handleFormSubmit} />
+          <SignInButton />
           {loading && <p className="error-message">{loading}</p>}
         </form>
       </section>
