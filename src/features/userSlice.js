@@ -19,8 +19,10 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
+    updateEmailToRemember: (state, action) =>  {
+      state.userInfo = action.payload.email
+    },
     resetUser: () => {
-      // Réinitialisez l'état de l'utilisateur en utilisant initialState pour la tranche update
       return { ...initialState };
     },
   },
@@ -42,6 +44,6 @@ const userSlice = createSlice({
   },
 });
 
-export const { resetUser } = userSlice.actions;
+export const { resetUser, updateEmailToRemember } = userSlice.actions;
 
 export default userSlice.reducer;

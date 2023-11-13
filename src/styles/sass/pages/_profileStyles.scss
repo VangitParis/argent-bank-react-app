@@ -49,12 +49,14 @@
     // margin-top: 0.67em;
     // margin-bottom: 0.67em;
     >input{
-      color: $color-black;
-      border-color: $color-white;
+      color: rgba(0, 0, 0, 0.5);
+      border: 1px solid grey;
+      border-radius: 5px;
       background-color: $color-white;
       font-weight: bold;
       padding: 10px;
       margin: 0 10px;
+      font-size: 1rem;
     }
 
   }
@@ -64,13 +66,14 @@
     
   }
   .edit-button-update{
-    border-color: $color-green;
+    border: 1px solid $color-green;
     background-color: $color-white;
     color: $color-green;
     font-weight: bold;
     padding: 5px;
     margin: 0 10px;
-    width: auto;
+    width: 100px;
+    border-radius: 5px;
   }
   
   .header {

@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateUserProfile } from "../../services/userService";
-// import { setUserToken } from "../../features/authSlice";
 
 export default function UpdateUser() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -29,16 +28,12 @@ export default function UpdateUser() {
     setIsEditing(false);
   };
 
- 
-
   const handleCancelClick = () => {
     // Annuler les modifications et réinitialisez les champs
     setIsEditing(false);
     setFirstName(userInfo ? userInfo.firstName : "");
     setLastName(userInfo ? userInfo.lastName : "");
   };
-
-
 
   return (
     <div className="update-user-container">
