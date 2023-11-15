@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
+
   }
   
   .main-nav a {
@@ -37,4 +38,17 @@
     max-width: 100%;
     width: 200px;
   }
-
+  .flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+/* Styles spécifiques pour les écrans de 425 pixels ou moins */
+@media (max-width: 425px) {
+  .main-nav-logo-image{
+    width: 150px;
+  }
+  .text-hide-mobile {
+    display: none; 
+  }
+}

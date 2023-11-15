@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { updateUserProfile } from "../services/userService";
 
-// // initialize userToken from local storage
-// export const userTokenUpdated= localStorage.getItem("userToken")
-//   ? localStorage.getItem("userToken")
-//   : null;
 
 const initialState = {
   loading: false,
@@ -19,7 +15,6 @@ const updateSlice = createSlice({
   initialState,
   reducers: {
     resetUpdateUser: () => {
-      // Réinitialisez l'état de l'utilisateur en utilisant initialState pour la tranche update
       return { ...initialState };
     },
   },

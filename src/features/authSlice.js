@@ -21,7 +21,6 @@ const authSlice = createSlice({
     },
 
     resetAuthUser: () => {
-      // Réinitialisez l'état de l'utilisateur en utilisant initialState
       return { ...initialState };
     },
   },

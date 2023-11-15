@@ -20,6 +20,8 @@ export default function Login() {
   const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
+
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -33,6 +35,9 @@ export default function Login() {
       }
     }
   };
+
+
+
 
   const validateEmail = (email) => {
     // Utilisation de regex pour valider l'email
@@ -48,7 +53,7 @@ export default function Login() {
         dispatch(userLogin({ email, password })).then((action) => {
           const response = action.payload;
 
-          // Vérifiez si la connexion a réussi en fonction de la réponse du backend
+          // La connexion a réussi par rapport à la réponse du backend ?
           if (response && response.userToken) {
             const userToken = response.userToken;
 
@@ -88,7 +93,7 @@ export default function Login() {
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
             <input
-              type="text"
+              type="email"
               id="username"
               name="username"
               autoComplete="username"

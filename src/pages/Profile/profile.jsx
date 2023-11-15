@@ -4,16 +4,22 @@ import "../../styles/sass/pages/_profileStyles.scss";
 import { connectUser } from "../../services/userService";
 
 import UpdateUser from "../../components/UpdateUser/updateUser";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.auth);
   const userToken = useSelector((state) => state.auth.userToken);
 
   useEffect(() => {
     // userToken est présent, connecter l'utilisateur
-    dispatch(connectUser({ authToken: userToken }));
+    if (userToken) {
+      dispatch(connectUser({ authToken: userToken }));
+    } else {
+      navigate('/login')
+    }
+    
   }, [dispatch, userToken]);
 
   return loading ? (

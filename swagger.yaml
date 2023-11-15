@@ -1,0 +1,201 @@
+openapi: 3.0.3
+info:
+  title: Bank Argent Transactions API documentation 
+  description: |-
+    Contains all available API endpoints in this codebase
+  termsOfService: http://swagger.io/terms/
+  version: 1.0.11
+  
+servers:
+  - url: localhost:3001/api/v1
+tags: 
+  - name: Transactions
+    description: Everything about your Transactions
+   
+paths:
+  /{user}/transactions:
+    get:
+      tags:
+        - Transactions Module
+      summary: Transactions
+      description: Get all transactions for current month, grouped by account
+      parameters:
+        - name: user
+          in: path
+          description: Transaction Payload
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'Successful Response'
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/UserTransactionsDetails'         
+        '404':
+          description: "No transactions found for the user or invalid profile ID."
+        '500':
+          description: "Internal server error."
+   
+  /{user}/transactions/{id}/details:
+    get:
+      tags: 
+        - Transaction Details
+      summary: Get details of a  transaction.
+      description: Details of a  transaction.
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Successful response."
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransactionDetails'
+        '404':
+          description: "Transaction not found or invalid transaction ID."
+        '500':
+          description: "Internal server error."
+
+  /{user}/transactions/{id}:
+    post:
+      tags: 
+        - Transaction Informations
+      summary: "Add information to a transaction."
+      description: "Add information such as category or note to a transaction."
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: "Information to add to the transaction."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdateInfo'
+      responses:
+        '200':
+          description: "Successful update."
+        '404':
+          description: "Transaction not found or invalid transaction ID."
+        '500':
+          description: "Internal server error"
+          
+    put:
+      summary: "Update information of a specific transaction."
+      description: "Update information such as category or note of a specific transaction."
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: "Updated information for the transaction."
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransactionUpdateInfo'
+      responses:
+        '200':
+          description: "Successful update."
+        '404':
+          description: "Transaction not found or invalid transaction ID."
+        '500':
+          description: "Internal server error."      
+          
+    delete:
+      summary: "Delete a transaction."
+      description: "Delete a transaction by ID."
+      parameters:
+        - name: user
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: "Successful deletion."
+        '404':
+          description: "Transaction not found or invalid transaction ID."
+        '500':
+          description: "Internal server error."      
+       
+components:
+  schemas:
+    UserTransactionsDetails:
+      type: object
+      properties:
+        availableBalance:
+          type: number
+          format: float
+          description: "Balance of the last transaction."
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TransactionDetails'
+          
+    TransactionDetails:
+      type: object
+      properties:
+        date:
+          type: string
+          format: date
+          description: "Date of the transaction."
+        description:
+          type: string
+          description: "Description of the transaction."
+        amount:
+          type: number
+          format: float
+          description: "Amount of the transaction."
+        balance:
+          type: number
+          format: float
+          description: "Balance after the transaction."      
+          
+    TransactionUpdateInfo:
+      type: object
+      properties:
+        category:
+          type: string
+          description: "Category of the transaction."
+        note:
+          type: string
+          description: "Additional note for the transaction."      
+          
+          
+          
+          
+          
+          
+          
+          
+          

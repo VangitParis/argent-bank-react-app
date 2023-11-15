@@ -5,7 +5,6 @@ import logo from "../../../assets/img/argentBankLogo.png";
 import "../../../styles/sass/layouts/_headerStyles.scss";
 import { useNavigate } from "react-router-dom/dist";
 import { useDispatch, useSelector } from "react-redux";
-// import { userToken } from "../../../features/userSlice";
 import { resetAuthUser } from "../../../features/authSlice";
 import { resetUpdateUser } from "../../../features/updateSlice";
 import { resetUser } from "../../../features/userSlice";
@@ -19,7 +18,8 @@ export default function Header() {
 
   // Fonction de déconnexion
   const handleLogout = () => {
-    // Supprimer la clé du token de l'utilisateur du localStorage
+  
+        // Supprimer la clé du token de l'utilisateur du localStorage
     localStorage.removeItem("userToken");
     // Dispatch l'action de déconnexion pour réinitialiser l'état de l'utilisateur
     dispatch(resetAuthUser());
@@ -28,6 +28,10 @@ export default function Header() {
 
     // Rediriger vers la page de connexion
     navigate("/login");
+    
+       
+   
+   
   };
 
   const getFirstName = userInfo ? userInfo.firstName : "";
@@ -37,7 +41,7 @@ export default function Header() {
 
   if (userUpdateInfo) {
     firstName = getUpdateFirstName;
-  } else {
+  } else if(userInfo){
     firstName = getFirstName;
   }
 
@@ -53,21 +57,21 @@ export default function Header() {
           />
           <h1 className="sr-only">Argent Bank</h1>
         </Link>
-        <div>
+        <div className="flex-center">
           {/* Vérifier si un utilisateur est connecté et afficher le bouton de déconnexion si c'est le cas */}
           {isConnected ? (
             <>
-              <Link className="main-nav-item" to="/profile">
+              <Link className="main-nav-item flex-center" to="/profile">
                 <i className="fa fa-user-circle"></i>
                 {firstName}
               </Link>
               <Link
-                className="main-nav-item"
+                className="main-nav-item flex-center"
                 to="/login"
                 onClick={handleLogout}
               >
                 <i className="fa fa-sign-out"></i>
-                Sign Out
+                <p className="text-hide-mobile">Sign Out</p>
               </Link>
             </>
           ) : (

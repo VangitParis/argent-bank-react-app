@@ -10,6 +10,7 @@ export const store = configureStore({
     user: userReducer,
     auth: authReducer,
     update: updateReducer,
+   
   },
 
 });

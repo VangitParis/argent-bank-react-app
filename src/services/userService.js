@@ -1,14 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { callApi } from "./apiCall";
 import { userToken } from "../features/userSlice";
-// import { userTokenUpdated } from "../features/updateSlice";
 
 const backendURL = "http://localhost:3001";
 
 export const userLogin = createAsyncThunk(
   "user/login",
   async ({ email, password }, { rejectWithValue }) => {
-
     const url = `${backendURL}/api/v1/user/login`;
     const data = { email, password };
 
@@ -18,9 +16,9 @@ export const userLogin = createAsyncThunk(
       if (response.status === 400) {
         return rejectWithValue(
           "Login failed. Please check your login details."
-        );}
-       
-      
+        );
+      }
+
       if (response.status === 500) {
         return rejectWithValue("Internal Server Error");
       }
@@ -30,7 +28,6 @@ export const userLogin = createAsyncThunk(
         return { userToken };
       }
     } catch (error) {
-    
       if (error.response && error.response.data.message) {
         return rejectWithValue("Invalid Fields");
       } else {
@@ -49,30 +46,22 @@ export const connectUser = createAsyncThunk(
     try {
       if (userToken) {
         const response = await callApi(url, "POST", data, userToken);
-      
 
         if (response.status === 200) {
-          
           return response.body;
         } else if (response.status === 400) {
           return rejectWithValue(
             "Login failed. Please check your login details."
           );
         } else if (response.status === 401) {
-         
-          return rejectWithValue(
-            "User Token Error"
-          );
+          return rejectWithValue("User Token Error");
         }
-
-        
       }
     } catch (error) {
       return rejectWithValue(error);
     }
   }
 );
-
 
 export const updateUserProfile = createAsyncThunk(
   "update/updateUserProfile",

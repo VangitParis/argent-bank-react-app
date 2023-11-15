@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateUserProfile } from "../../services/userService";
@@ -29,7 +28,7 @@ export default function UpdateUser() {
   };
 
   const handleCancelClick = () => {
-    // Annuler les modifications et réinitialisez les champs
+    // Annuler les modifications et réinitialiser les champs
     setIsEditing(false);
     setFirstName(userInfo ? userInfo.firstName : "");
     setLastName(userInfo ? userInfo.lastName : "");

@@ -46,8 +46,7 @@
     padding: 10px;
   }
   .edit-form {
-    // margin-top: 0.67em;
-    // margin-bottom: 0.67em;
+    width: 100%;
     >input{
       color: rgba(0, 0, 0, 0.5);
       border: 1px solid grey;
@@ -55,8 +54,9 @@
       background-color: $color-white;
       font-weight: bold;
       padding: 10px;
-      margin: 0 10px;
+      margin: 10px 10px;
       font-size: 1rem;
+      max-width: 30%;
     }
 
   }
