@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "font-awesome/css/font-awesome.min.css";
 import "../../styles/sass/pages/_loginStyles.scss";
@@ -8,10 +8,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import SignInButton from "../../components/Buttons/signInButton";
 import { updateEmailToRemember } from "../../features/userSlice";
+// import { updateEmailToRemember } from "../../features/userSlice";
 
 export default function Login() {
   const { loading } = useSelector((state) => state.user);
-
+  const userToken = useSelector((state) => state.user.userToken)
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -20,7 +22,21 @@ export default function Login() {
   const [error, setError] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
-
+  useEffect(() => {
+    
+    // userToken est présent, connecter l'utilisateur
+    if (userToken) {
+      console.log(email);
+      console.log(userToken);
+      // Dispatch l'action pour mettre à jour l'email à retenir
+      const isRemember = dispatch(updateEmailToRemember({ email, userToken }));
+      navigate('/profile');
+      // Si l'utilisateur n'est pas déjà connecté, redirigez vers la page de profil
+      if (!isRemember) {
+       console.log('email:', email);
+      }
+    }
+  }, [dispatch, email, userToken]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -35,8 +51,10 @@ export default function Login() {
       }
     }
   };
+ 
 
-
+ 
+  
 
 
   const validateEmail = (email) => {
@@ -60,16 +78,14 @@ export default function Login() {
             // Mettre à jour le token dans le Redux store
             dispatch(setUserToken(userToken));
 
-            if (rememberMe) {
-              dispatch(updateEmailToRemember(email));
-            }
+            
 
             // redirection vers la page de profile
             navigate("/profile");
           } else {
             // Réinitialiser le mot de passe en cas d'échec de connexion
             setPassword("");
-            setError("Login failed. Please check your login details.");
+            setError(response);
           }
         });
       } catch (error) {

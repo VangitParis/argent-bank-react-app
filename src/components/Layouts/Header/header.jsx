@@ -18,20 +18,15 @@ export default function Header() {
 
   // Fonction de déconnexion
   const handleLogout = () => {
-  
-        // Supprimer la clé du token de l'utilisateur du localStorage
+    // Supprimer la clé du token de l'utilisateur du localStorage
     localStorage.removeItem("userToken");
     // Dispatch l'action de déconnexion pour réinitialiser l'état de l'utilisateur
+    dispatch(resetUser());
     dispatch(resetAuthUser());
     dispatch(resetUpdateUser());
-    dispatch(resetUser());
-
+    
     // Rediriger vers la page de connexion
     navigate("/login");
-    
-       
-   
-   
   };
 
   const getFirstName = userInfo ? userInfo.firstName : "";
@@ -41,7 +36,7 @@ export default function Header() {
 
   if (userUpdateInfo) {
     firstName = getUpdateFirstName;
-  } else if(userInfo){
+  } else if (userInfo) {
     firstName = getFirstName;
   }
 

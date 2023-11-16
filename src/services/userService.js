@@ -19,9 +19,9 @@ export const userLogin = createAsyncThunk(
         );
       }
 
-      if (response.status === 500) {
-        return rejectWithValue("Internal Server Error");
-      }
+      // if (response.status === 500) {
+      //   return rejectWithValue("Internal Server Error");
+      // }
       if (response.status === 200) {
         const userToken = response.body.token;
         localStorage.setItem("userToken", userToken);
@@ -31,7 +31,7 @@ export const userLogin = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue("Invalid Fields");
       } else {
-        return rejectWithValue("An error occurred while logging in.");
+        return rejectWithValue("Internal Server Error");
       }
     }
   }

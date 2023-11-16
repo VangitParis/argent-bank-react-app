@@ -19,12 +19,18 @@ const userSlice = createSlice({
   initialState,
 
   reducers: {
-    updateEmailToRemember: (state, action) =>  {
-      state.userInfo = action.payload.email
-    },
     resetUser: () => {
-      return { ...initialState };
+      return {
+        loading: false,
+        userInfo: null,
+        userToken: null,
+        error: null,
+        success: false,};
     },
+    updateEmailToRemember: (state, action) => {
+      state.userInfo = action.payload
+    },
+  
   },
   extraReducers: (builder) => {
     builder.addCase(userLogin.pending, (state) => {
