@@ -24,10 +24,8 @@ export default function Login() {
 
   useEffect(() => {
     
-    // userToken est présent, connecter l'utilisateur
+    // userToken est présent, reconnecter l'utilisateur si il remember
     if (userToken) {
-      console.log(email);
-      console.log(userToken);
       // Dispatch l'action pour mettre à jour l'email à retenir
       const isRemember = dispatch(updateEmailToRemember({ email, userToken }));
       navigate('/profile');
