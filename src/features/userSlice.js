@@ -25,7 +25,8 @@ const userSlice = createSlice({
         userInfo: null,
         userToken: null,
         error: null,
-        success: false,};
+        success: false
+      }
     },
     updateEmailToRemember: (state, action) => {
       state.userInfo = action.payload

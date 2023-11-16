@@ -21,7 +21,13 @@ const authSlice = createSlice({
     },
 
     resetAuthUser: () => {
-      return { ...initialState };
+      return {
+        loading: false,
+        userInfo: null,
+        userToken: null,
+        error: null,
+        success: false
+      };
     },
   },
 
