@@ -30,7 +30,19 @@ npm run start
 ```
 
 Your Local dev should now be running at http://locahost:3000 and you will now have two users in your MongoDB database!
+### Tony Stark
 
+- First Name: `Tony`
+- Last Name: `Stark`
+- Email: `tony@stark.com`
+- Password: `password123`
+
+### Steve Rogers
+
+- First Name: `Steve`,
+- Last Name: `Rogers`,
+- Email: `steve@rogers.com`,
+- Password: `password456`
 
 ## API Documentation
 
@@ -39,7 +51,7 @@ To learn more about how the API works, once you have started your local environm
 
 ## Features
 - User authentication and authorization
-- View profiles
+- View profile
 - Update user firstName or lastName
 - Explore user-friendly interfaces for a seamless banking experience
 
