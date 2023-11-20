@@ -8,10 +8,16 @@ This repository contains the codebase for the frontend of the Argent Bank applic
 
 Argent Bank uses the following tech stack:
 
-- [Node.js v18](https://nodejs.org/en/)
-- [MongoDB Community Server](https://www.mongodb.com/try/download/community)
+- [Node.js v14 or higher](https://nodejs.org/en/)
 
 Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+```bash
+# Check Node.js version
+node --version
+
+# Check npm version
+npm --version
+```
 
 ### Instructions
 
@@ -30,6 +36,9 @@ npm run start
 ```
 
 Your Local dev should now be running at http://locahost:3000 and you will now have two users in your MongoDB database!
+
+## Sample Users
+
 ### Tony Stark
 
 - First Name: `Tony`
@@ -52,7 +61,7 @@ To learn more about how the API works, once you have started your local environm
 ## Features
 - User authentication and authorization
 - View profile
-- Update user firstName or lastName
+- Update user firstName and/or lastName
 - Explore user-friendly interfaces for a seamless banking experience
 
 ## Technologies Used
