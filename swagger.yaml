@@ -1,55 +1,71 @@
 openapi: 3.0.3
 info:
-  title: Bank Argent Transactions API documentation 
-  description: |-
-    Contains all available API endpoints in this codebase
+  title: Bank Argent Transactions API documentation
+  description: Contains all available API endpoints in this codebase
   termsOfService: http://swagger.io/terms/
   version: 1.0.11
-  
+
 servers:
-  - url: localhost:3001/api/v1
-tags: 
+  - url: http://localhost:3001/api/v1
+
+tags:
   - name: Transactions
     description: Everything about your Transactions
-   
+  - name: Transaction Details
+    description: Details about individual transactions
+  - name: Information Details
+    description: Update information for transactions
+
 paths:
-  /{user}/transactions:
+  /transactions:
     get:
       tags:
-        - Transactions Module
+        - Transactions
       summary: Transactions
-      description: Get all transactions for current month, grouped by account
-      parameters:
-        - name: user
-          in: path
-          description: Transaction Payload
-          required: true
-          schema:
-            type: string
+      description: Get all transactions for the current month, grouped by account
+      security:
+        - Bearer: []  
       responses:
         '200':
-          description: 'Successful Response'
+          description: User Profile's transactions retrieved successully
           content:
             application/json:
               schema:
-                  $ref: '#/components/schemas/UserTransactionsDetails'         
+                $ref: '#/components/schemas/UserTransactions'
+        '401':
+          description: User unathorized. Authentification is required.
+          content:
+            application/json:
+              example:
+                error:  User Unauthenticated. Authentification is required
         '404':
-          description: "No transactions found for the user or invalid profile ID."
+          description: No transactions found for the user or invalid profile
+          content:
+           application/json:
+             example:
+              error: Transactions not found or invalid profile.
         '500':
-          description: "Internal server error."
-   
-  /{user}/transactions/{id}/details:
+         description: Internal server error.
+         content:
+           application/json:
+            example:
+              error: An internal server error occurred.
+
+    parameters:
+      - in: header
+        name: Auth
+        description: Attach Bearer JWT token
+        required: true
+        schema: 
+          type: string
+
+  /transactions/{id}/details:
     get:
-      tags: 
+      tags:
         - Transaction Details
-      summary: Get details of a  transaction.
-      description: Details of a  transaction.
+      summary: Get details of a transaction.
+      description: Details of a transaction.
       parameters:
-        - name: user
-          in: path
-          required: true
-          schema:
-            type: string
         - name: id
           in: path
           required: true
@@ -57,145 +73,172 @@ paths:
             type: string
       responses:
         '200':
-          description: "Successful response."
+          description: Details of the transaction retrieved successfully.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/TransactionDetails'
         '404':
-          description: "Transaction not found or invalid transaction ID."
+         description: Transaction not found or invalid transaction ID.
+         content:
+          application/json:
+            example:
+              error: Transaction not found.
         '500':
-          description: "Internal server error."
+         description: Internal server error.
+         content:
+           application/json:
+            example:
+              error: An internal server error occurred.
 
-  /{user}/transactions/{id}:
-    post:
-      tags: 
-        - Transaction Informations
-      summary: "Add information to a transaction."
-      description: "Add information such as category or note to a transaction."
+  /transactions/{id}/category:
+    patch:
+      tags:
+        - Information Details
+      summary: Update information of a specific transaction.
+      description: Update category using a dropdown selection.
       parameters:
-        - name: user
-          in: path
-          required: true
-          schema:
-            type: string
         - name: id
           in: path
           required: true
           schema:
             type: string
       requestBody:
-        description: "Information to add to the transaction."
+        description: Updated category for the transaction.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionUpdateInfo'
+              $ref: '#/components/schemas/TransactionUpdateCategory'
       responses:
-        '200':
-          description: "Successful update."
-        '404':
-          description: "Transaction not found or invalid transaction ID."
-        '500':
-          description: "Internal server error"
-          
-    put:
-      summary: "Update information of a specific transaction."
-      description: "Update information such as category or note of a specific transaction."
+       '200':
+        description: Category updated successfully.
+        content:
+          application/json:
+            example:
+              message: Category updated successfully.
+       '404':
+        description: Transaction not found or invalid transaction ID.
+        content:
+          application/json:
+            example:
+              error: Transaction not found.
+       '500':
+        description: Internal server error.
+        content:
+          application/json:
+            example:
+              error: An internal server error occurred.
+
+  /transactions/{id}/notes:
+    patch:
+      tags:
+        - Information Details
+      summary: Update information of a specific transaction.
+      description: Update notes by direct input.
       parameters:
-        - name: user
-          in: path
-          required: true
-          schema:
-            type: string
         - name: id
           in: path
           required: true
           schema:
             type: string
       requestBody:
-        description: "Updated information for the transaction."
+        description: Updated notes for the transaction.
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionUpdateInfo'
+              $ref: '#/components/schemas/TransactionUpdateNotes'
       responses:
-        '200':
-          description: "Successful update."
-        '404':
-          description: "Transaction not found or invalid transaction ID."
-        '500':
-          description: "Internal server error."      
-          
-    delete:
-      summary: "Delete a transaction."
-      description: "Delete a transaction by ID."
-      parameters:
-        - name: user
-          in: path
-          required: true
-          schema:
-            type: string
-        - name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: "Successful deletion."
-        '404':
-          description: "Transaction not found or invalid transaction ID."
-        '500':
-          description: "Internal server error."      
-       
+       '200':
+        description: Notes updated successfully.
+        content:
+          application/json:
+            example:
+              message: Notes updated successfully.
+       '404':
+        description: Transaction not found or invalid transaction ID.
+        content:
+          application/json:
+            example:
+              error: Transaction not found.
+       '500':
+        description: Internal server error.
+        content:
+          application/json:
+            example:
+              error: An internal server error occurred.
+
 components:
   schemas:
-    UserTransactionsDetails:
+    UserTransactions:
       type: object
       properties:
         availableBalance:
           type: number
           format: float
-          description: "Balance of the last transaction."
+          description: Balance of the last transaction.
         transactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/TransactionDetails'
-          
+          type: object
+          properties:
+            date: 
+              type: string
+              format: date-time
+              description: Date of the transaction
+            description:
+              type: string
+              description: Description of the transaction.
+            amount:
+              type: number
+              format: float
+              description: Amount of the transaction.
+            balance:
+              type: number
+              format: float
+              description: Balance after the transaction  
     TransactionDetails:
       type: object
       properties:
         date:
           type: string
-          format: date
-          description: "Date of the transaction."
+          format: date-time
+          description: Date of the transaction.
         description:
           type: string
-          description: "Description of the transaction."
+          description: Description of the transaction.
         amount:
           type: number
           format: float
-          description: "Amount of the transaction."
+          description: Amount of the transaction.
         balance:
           type: number
           format: float
-          description: "Balance after the transaction."      
-          
-    TransactionUpdateInfo:
+          description: Balance after the transaction.
+        category:
+          type: string
+          description: Category of the transaction.
+        notes:
+          type: string
+          description: Additional note for the transaction.
+
+    TransactionUpdateCategory:
       type: object
       properties:
         category:
           type: string
-          description: "Category of the transaction."
-        note:
+          description: Category of the transaction.
+          enum:
+            - 'Food'
+            - 'Assurance'
+            - 'Other'
+
+    TransactionUpdateNotes:
+      type: object
+      properties:
+        notes:
           type: string
-          description: "Additional note for the transaction."      
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          description: Additional note for the transaction.
+
+  securitySchemes:
+    Bearer:  
+      type: apiKey
+      name: Authorization
+      in: header
