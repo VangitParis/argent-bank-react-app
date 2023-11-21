@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userLogin } from "../services/userService";
 
-// initialize userToken from local storage
+// Initialisation de userToken dans le local storage
 export const userToken = localStorage.getItem("userToken")
   ? localStorage.getItem("userToken")
   : null;
@@ -13,7 +13,11 @@ const initialState = {
   error: null,
   success: false,
 };
-
+/**
+ * Le slice Redux pour gérer les informations de l'utilisateur.
+ *
+ * @type {import("@reduxjs/toolkit").Slice<initialState, {}, string>}
+ */
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -28,6 +32,12 @@ const userSlice = createSlice({
         success: false
       }
     },
+    /**
+     * Met à jour l'e-mail à mémoriser dans les informations de l'utilisateur.
+     *
+     * @param {initialState} state - L'état actuel du slice utilisateur.
+     * @param {import("@reduxjs/toolkit").PayloadAction<string>} action - L'action Redux contenant le nouvel e-mail.
+     */
     updateEmailToRemember: (state, action) => {
       state.userInfo = action.payload
     },

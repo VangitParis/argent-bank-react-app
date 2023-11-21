@@ -1,9 +1,13 @@
-// http://localhost:3001/api/v1/user/login   method : POST
-// http://localhost:3001/api/v1/user/signup  method : POST
-// const urlProfile = 'http://localhost:3001/api/v1/user/profile ';
-// http://localhost:3001/api/v1/user/profile method : PUT
-
-// apiCall.js
+/**
+ * Effectue un appel API avec les paramètres fournis.
+ *
+ * @param {string} url - L'URL de l'API.
+ * @param {string} method - La méthode HTTP (GET, POST, PUT, etc.).
+ * @param {Object} [data=null] - Les données à envoyer avec la requête (null si aucune donnée n'est requise).
+ * @param {string|null} [authToken=null] - Le token, si nécessaire.
+ * @returns {Promise<Object>} - Une promesse avec les données de la réponse JSON de l'API.
+ * @throws {Error} - Une erreur si la requête échoue.
+ */
 
 export async function callApi(url, method, data, authToken = null) {
   const headers = {

@@ -11,12 +11,14 @@ Argent Bank uses the following tech stack:
 - [Node.js v14 or higher](https://nodejs.org/en/)
 
 Please make sure you have the right versions and download both packages. You can verify this by using the following commands in your terminal:
+
 ```bash
 # Check Node.js version
 node --version
 
 # Check npm version
 npm --version
+
 ```
 
 ### Instructions
@@ -53,10 +55,6 @@ Your Local dev should now be running at http://locahost:3000 and you will now ha
 - Email: `steve@rogers.com`,
 - Password: `password456`
 
-## API Documentation
-
-To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
-
 
 ## Features
 - User authentication and authorization
@@ -70,3 +68,10 @@ To learn more about how the API works, once you have started your local environm
 - Fetch for HTTP requests
 - React Router for navigation
 - Sass for styling
+
+
+## API Documentation
+
+To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+
+

@@ -25,7 +25,6 @@ const updateSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    // connect user
     builder.addCase(updateUserProfile.pending, (state) => {
       state.loading = true;
       state.error = null;

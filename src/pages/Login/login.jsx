@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import SignInButton from "../../components/Buttons/signInButton";
 import { updateEmailToRemember } from "../../features/userSlice";
-// import { updateEmailToRemember } from "../../features/userSlice";
 
 export default function Login() {
   const { loading } = useSelector((state) => state.user);
@@ -31,7 +30,7 @@ export default function Login() {
       navigate('/profile');
       // Si l'utilisateur n'est pas déjà connecté, redirigez vers la page de profil
       if (!isRemember) {
-       console.log('email:', email);
+        navigate('/profile')
       }
     }
   }, [dispatch, email, userToken]);

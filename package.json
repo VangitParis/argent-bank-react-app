@@ -47,6 +47,7 @@
   "devDependencies": {
     "@types/redux": "^3.6.0",
     "eslint": "^8.52.0",
-    "eslint-plugin-react": "^7.33.2"
+    "eslint-plugin-react": "^7.33.2",
+    "babel": "@babel/plugin-proposal-private-property-in-object"
   }
 }
