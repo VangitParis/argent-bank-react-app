@@ -25,8 +25,8 @@ export default function Header() {
     dispatch(resetAuthUser());
     dispatch(resetUpdateUser());
     
-    // Rediriger vers la page de connexion
-    navigate("/login");
+    // Rediriger vers la page d'accueil'
+    navigate("/");
   };
 
   const getFirstName = userInfo ? userInfo.firstName : "";
@@ -62,7 +62,7 @@ export default function Header() {
               </Link>
               <Link
                 className="main-nav-item flex-center"
-                to="/login"
+                to="/"
                 onClick={handleLogout}
               >
                 <i className="fa fa-sign-out"></i>
