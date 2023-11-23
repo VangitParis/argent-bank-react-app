@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/argent-bank-react-app/static/css/main.d520afb5.css",
+    "main.js": "/argent-bank-react-app/static/js/main.9ca4197a.js",
+    "static/media/fontawesome-webfont.svg?v=4.7.0": "/argent-bank-react-app/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+    "static/media/fontawesome-webfont.eot": "/argent-bank-react-app/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
+    "static/media/fontawesome-webfont.ttf?v=4.7.0": "/argent-bank-react-app/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+    "static/media/bank-tree.jpeg": "/argent-bank-react-app/static/media/bank-tree.4d59987c7c62b024b014.jpeg",
+    "static/media/fontawesome-webfont.woff?v=4.7.0": "/argent-bank-react-app/static/media/fontawesome-webfont.f691f37e57f04c152e23.woff",
+    "static/media/fontawesome-webfont.woff2?v=4.7.0": "/argent-bank-react-app/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+    "static/media/icon-security.png": "/argent-bank-react-app/static/media/icon-security.1c819fa1007a5c53e6a9.png",
+    "static/media/argentBankLogo.png": "/argent-bank-react-app/static/media/argentBankLogo.e031a16c76ab9bbbf78a.png",
+    "static/media/icon-chat.png": "/argent-bank-react-app/static/media/icon-chat.e238539d82b5a5f63c33.png",
+    "static/media/icon-money.png": "/argent-bank-react-app/static/media/icon-money.8ec88bb1a5070fd6513a.png",
+    "index.html": "/argent-bank-react-app/index.html",
+    "main.d520afb5.css.map": "/argent-bank-react-app/static/css/main.d520afb5.css.map",
+    "main.9ca4197a.js.map": "/argent-bank-react-app/static/js/main.9ca4197a.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d520afb5.css",
+    "static/js/main.9ca4197a.js"
+  ]
+}
