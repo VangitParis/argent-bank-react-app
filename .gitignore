@@ -5,7 +5,7 @@
 /.pnp
 .pnp.js
 /.vscode/
-swagger-transactions
+swagger-transactions.yaml
 
 # testing
 /coverage
