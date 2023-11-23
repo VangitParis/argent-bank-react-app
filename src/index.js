@@ -16,7 +16,7 @@ const root = createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <StrictMode>
-      <BrowserRouter>
+      <BrowserRouter basename="/argent-bank-react-app">
         <Header />
         <App />
         <Footer />
