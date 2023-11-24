@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { resetAuthUser } from "../../../features/authSlice";
 import { resetUpdateUser } from "../../../features/updateSlice";
 import { resetUser } from "../../../features/userSlice";
+import { selectAuthUser, selectUpdateUser } from "../../../utils/selectors";
 
 export default function Header() {
-  const { userInfo } = useSelector((state) => state.auth);
-  const { userUpdateInfo } = useSelector((state) => state.update);
+  const { userInfo } = useSelector(selectAuthUser);
+  const { userUpdateInfo } = useSelector(selectUpdateUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isConnected = localStorage.getItem("userToken");

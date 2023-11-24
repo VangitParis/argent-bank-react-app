@@ -8,10 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom/dist";
 import SignInButton from "../../components/Buttons/signInButton";
 import { updateEmailToRemember } from "../../features/userSlice";
+import { selectUser } from "../../utils/selectors";
 
 export default function Login() {
-  const { loading } = useSelector((state) => state.user);
-  const userToken = useSelector((state) => state.user.userToken)
+  const { loading } = useSelector(selectUser);
+  const userToken = useSelector((state) => state.user.userToken);
   
   const dispatch = useDispatch();
   const navigate = useNavigate();

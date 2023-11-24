@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { updateUserProfile } from "../../services/userService";
+import { selectAuthUser } from "../../utils/selectors";
 
 export default function UpdateUser() {
-  const { userInfo } = useSelector((state) => state.auth);
+  const { userInfo } = useSelector(selectAuthUser);
   const dispatch = useDispatch();
   const [isEditing, setIsEditing] = useState(false);
   const [firstName, setFirstName] = useState(

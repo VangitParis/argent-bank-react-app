@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "../../styles/sass/pages/_profileStyles.scss";
 import { connectUser } from "../../services/userService";
-
 import UpdateUser from "../../components/UpdateUser/updateUser";
 import { useNavigate } from "react-router-dom";
+import { selectAuthUser } from "../../utils/selectors";
 
 export default function Profile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error } = useSelector(selectAuthUser);
   const userToken = useSelector((state) => state.auth.userToken);
 
   useEffect(() => {
