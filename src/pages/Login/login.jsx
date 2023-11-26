@@ -29,7 +29,6 @@ export default function Login() {
       // Dispatch l'action pour mettre à jour l'email à retenir
       const isRemember = dispatch(updateEmailToRemember({ email, userToken }));
       navigate('/profile');
-      // Si l'utilisateur n'est pas déjà connecté, redirigez vers la page de profil
       if (!isRemember) {
         navigate('/profile')
       }
